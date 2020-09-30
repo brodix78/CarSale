@@ -1,0 +1,66 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  <filter>
+    <filter-name>AuthFilter</filter-name>
+    <filter-class>ru.carSale.filter.AuthFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>UTFilter</filter-name>
+    <filter-class>ru.carSale.filter.UTFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthFilter</filter-name>
+    <url-pattern>/advert.do</url-pattern>
+    <url-pattern>/image.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>UTFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>ru.carSale.listener.InitContext</listener-class>
+  </listener>
+  <listener>
+    <listener-class>ru.carSale.listener.InitSession</listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>AdvertServlet</servlet-name>
+    <servlet-class>ru.carSale.servlet.AdvertServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CarServlet</servlet-name>
+    <servlet-class>ru.carSale.servlet.CarServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CustomerServlet</servlet-name>
+    <servlet-class>ru.carSale.servlet.CustomerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>ru.carSale.servlet.PhotoServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AdvertServlet</servlet-name>
+    <url-pattern>/advert.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CarServlet</servlet-name>
+    <url-pattern>/car.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CustomerServlet</servlet-name>
+    <url-pattern>/customer.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/image.do</url-pattern>
+  </servlet-mapping>
+</web-app>

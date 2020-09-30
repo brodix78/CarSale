@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/carsale</property>
+        <property name="hibernate.connection.username">poster</property>
+        <property name="hibernate.connection.password">123</property>
+        <property name="hibernate.connection.pool_size">8</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="ru.carSale.model.car.Body" />
+        <mapping class="ru.carSale.model.car.Brand" />
+        <mapping class="ru.carSale.model.car.Config" />
+        <mapping class="ru.carSale.model.car.Engine" />
+        <mapping class="ru.carSale.model.car.Fuel" />
+        <mapping class="ru.carSale.model.car.Generation" />
+        <mapping class="ru.carSale.model.car.Model" />
+        <mapping class="ru.carSale.model.car.Transmission" />
+        <mapping class="ru.carSale.model.Advert" />
+        <mapping class="ru.carSale.model.Customer" />
+        <mapping class="ru.carSale.model.Photo" />
+        <mapping class="ru.carSale.model.Passport" />
+    </session-factory>
+</hibernate-configuration>

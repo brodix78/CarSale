@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='https://bootswatch.com/4/flatly/bootstrap.css'>
+
+    <title>CarSaleProject registrate</title>
+</head>
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="js/action.js"></script>
+<script src="js/input.js"></script>
+<script>
+function check(){
+  let ok = true;
+  if ($("#name").val().length < 1) {
+    ok = false;
+    input_alarm("name", "Поле не должно быть пустым");
+  } else {
+    input_default("name");
+  }
+  if ($("#phone").val().length < 1) {
+    ok = false;
+    input_alarm("phone", "Поле не должно быть пустым");
+  } else {
+    input_default("phone");
+  }
+  if ($("#login").val().length < 1) {
+    ok = false;
+    input_alarm("login", "Поле не должно быть пустым");
+  } else {
+    input_default("login");
+  }
+  if ($("#pass").val().length < 6) {
+    ok = false;
+    input_alarm("pass", "Пароль должен быть не короче 6 символов");
+  } else {
+    input_default("pass");
+  }
+  if ($("#pass2").val().length != $("#pass").val().length) {
+    ok = false;
+    input_alarm("pass2", "Пароль не совпадает");
+  } else {
+    input_default("pass2");
+  }
+  if (ok) {
+    auth(-500);
+  }
+}
+</script>
+<div id="menu">
+<!--you will find a menu here-->
+</div>
+<div class="container">
+  <div class="bs-docs-section">
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6">
+        <h3>
+          Регистрация на сайте
+        </h3>
+        <div class="form-group" id="name_input">
+          <label class="col-form-label" for="inputDefault" id="name_label">Имя</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group" id="login_input">
+          <label class="col-form-label" for="inputDefault" id="login_label">Логин</label>
+          <input type="text" class="form-control" id="login">
+        </div>
+        <div class="form-group" id="phone_input">
+          <label class="col-form-label" for="inputDefault" id="phone_label">Телефон</label>
+          <input type="text" class="form-control" id="phone">
+        </div>
+        <div class="form-group" id="pass_input">
+          <label class="col-form-label" for="inputDefault" id="pass_label">Пароль</label>
+          <input type="password" class="form-control" id="pass">
+        </div>
+        <div class="form-group" id="pass2_input">
+          <label class="col-form-label" for="inputDefault" id="pass2_label">Подтвердите пароль</label>
+          <input type="password" class="form-control" id="pass2">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" onclick="check();">Регистрация</button>
+      </div>
+      <div class="col-lg-3">
+      </div>
+  </div>
+</div>
+</div>
+<script>$("#menu").load("menu.html");</script>
+</body>
+</html>

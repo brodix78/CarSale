@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='https://bootswatch.com/4/flatly/bootstrap.css'>
+
+    <title>CarSaleProject new advet</title>
+    <script>
+
+    </script>
+</head>
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/action.js"></script>
+<script src="js/advertcr.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<div id="menu">
+<!--you will find a menu here-->
+</div>
+<div class="container">
+  <div class="bs-docs-section">
+    <div class="row">
+      <div class="col-lg-3">
+      </div>
+      <div class="col-lg-6">
+        <h4>
+          Новое объявление
+        </h4>
+        <div class="form-group">
+          <label for="Brand">Производитель</label>
+            <select class="form-control" id="brand" onselect="fill_model();">
+              <!-- brand zone-->
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="Model">Модель</label>
+            <select class="form-control" id="model" onselect="fill_gen();">
+              <!-- model zone-->
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="Generation">Поколение</label>
+            <select class="form-control" id="generation" onselect="fill_config();">
+              <!-- generation zone-->
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="Config">Конфигурация</label>
+            <select class="form-control" id="config">
+              <!-- config zone-->
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="Year">Год выпуска</label>
+            <select class="form-control" id="year">
+              <!-- production year zone-->
+            </select>
+        </div>
+        <div class="form-group" id="mileage_input">
+          <label class="col-form-label" for="mileage" id="mileage_label">Пробег, км</label>
+          <input type="number" min=0 class="form-control" id="mileage">
+        </div>
+        <div class="form-group" id="price_input">
+          <label class="col-form-label" for="price" id="price_label">Цена, руб.</label>
+          <input type="number" min=0 class="form-control" id="price">
+        </div>
+        <div class="form-group">
+          <label for="report">Текст объявления</label>
+          <textarea class="form-control" id="report" rows="6"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="image_upload">Загрузить фотографии</label>
+          <input type="file" enctype="multipart/form-data" accept="image/*" name="image" class="form-control-file" id="image_upload" aria-describedby="imageHelp">
+          <small id="imageHelp" class="form-text text-muted">Выберите файлы с фотографиями предлагаемого автомобиля</small>
+        </div>
+        <div class="row" id="pr_photo">
+          <!-- images preview zone -->
+        </div>
+        <p></p>
+        <button type="button" class="btn btn-primary btn-lg" onclick="post_advert();">Разместить</button>
+      </div>
+      <div class="col-lg-3">
+      </div>
+  </div>
+</div>
+</div>
+<script>
+var images;
+var files;
+  $("#menu").load("menu.html");
+  $('input[type=file]').change(function(){
+    files = this.files;
+  });
+  $('#image_upload').on('change', function(){upload();});
+  brands();
+</script>
+</body>
+</html>
