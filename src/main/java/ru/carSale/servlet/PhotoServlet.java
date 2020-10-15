@@ -5,6 +5,8 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.carSale.model.Photo;
 import ru.carSale.store.Store;
 import javax.servlet.ServletContext;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoServlet extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(PhotoServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -34,7 +38,7 @@ public class PhotoServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletContext servletContext = this.getServletConfig().getServletContext();
         Store store = (Store) getServletContext().getAttribute("store");
@@ -62,14 +66,16 @@ public class PhotoServlet extends HttpServlet {
                     photos.add(photo);
                 }
             }
-        } catch (FileUploadException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            logger.error("File upload mistake");
         }
         try {
             PrintWriter pw = resp.getWriter();
             pw.write(new JSONArray(photos).toString());
             pw.flush();
         } catch (Exception e) {
+            logger.error("File writing mistake");
             e.printStackTrace();
         }
     }

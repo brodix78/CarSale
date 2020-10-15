@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.carSale.model.Advert;
 import ru.carSale.model.Customer;
 import ru.carSale.model.Filter;
@@ -24,11 +26,11 @@ import java.util.Map;
 
 public class AdvertServlet extends HttpServlet {
 
+    private static final Logger logger = LoggerFactory.getLogger(AdvertServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         Store store = (Store) getServletContext().getAttribute("store");
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
         Integer id;
         String json = request.getParameter("filter");
         if (json != null) {
@@ -38,6 +40,7 @@ public class AdvertServlet extends HttpServlet {
             try {
                 filter = mapper.readValue(json, new TypeReference<>(){});
             } catch (JsonProcessingException e) {
+                logger.warn("Wrong data for filter mapping received");
                 e.printStackTrace();
             }
             if (filter != null) {
@@ -95,6 +98,7 @@ public class AdvertServlet extends HttpServlet {
             pw.write(data);
             pw.flush();
         } catch (Exception e) {
+            logger.error("Response writing mistake");
             e.printStackTrace();
         }
     }

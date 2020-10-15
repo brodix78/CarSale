@@ -38,6 +38,9 @@ function post_advert(){
       data: JSON.stringify(advert)
     }).done(function(data) {
       let adv = JSON.parse(data);
+      if (adv.redirect != null && adv.redirect) {
+        window.location.href = "auth.html";
+      }
       if (adv.id > 0) {
         alert("Объявление #" + adv.id + " успешно размещено");
         window.location.href = "index.html";
@@ -134,6 +137,9 @@ function upload(){
     processData: false,
     success:function(data) {
       let imgs = JSON.parse(data);
+      if (imgs.redirect != null && imgs.redirect) {
+        window.location.href = "auth.html";
+      }
       for (let i = 0; i < imgs.length && images.length < 6; i++) {
         image = JSON.parse(data)[i];
         images[images.length] = image;

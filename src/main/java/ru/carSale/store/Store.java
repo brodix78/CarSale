@@ -135,7 +135,7 @@ public class Store implements AutoCloseable{
 
     public Customer saveCustomer(Customer customer) {
         return this.tx(session -> {
-            Passport passport = Passport.of(customer.getLogin(), new String(customer.getPassword()));
+            Passport passport = Passport.of(customer.getLogin(), customer.getPassword());
             customer.setId(0);
             customer.setPassword("");
             session.save(customer);
@@ -276,11 +276,5 @@ public class Store implements AutoCloseable{
             session.saveOrUpdate(data);
             return data;
         });
-    }
-
-    public static void main(String[] args) {
-        Store store = new Store();
-        Photo photo = Photo.of("images/emoji-smiley-emoticon-sticker-smiley.jpg");
-        System.out.println(store.savePhoto(photo).getFile());
     }
 }

@@ -2,6 +2,8 @@ package ru.carSale.servlet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.carSale.model.car.Brand;
 import ru.carSale.store.Store;
 
@@ -9,17 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class CarServlet extends HttpServlet {
 
+    private static final Logger logger = LoggerFactory.getLogger(CarServlet.class.getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         Store store = (Store) getServletContext().getAttribute("store");
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
         try {
             String json = null;
             Integer id = Integer.parseInt(request.getParameter("reqId"));
@@ -48,6 +48,7 @@ public class CarServlet extends HttpServlet {
                 pw.write(json);
             }
         }  catch (Exception e) {
+            logger.error("Car data parsing/sending error");
             e.printStackTrace();
         }
     }

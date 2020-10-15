@@ -3,6 +3,8 @@ package ru.carSale.servlet;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.carSale.model.Customer;
 import ru.carSale.model.Passport;
 import ru.carSale.store.Store;
@@ -13,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 public class CustomerServlet extends HttpServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -27,13 +31,12 @@ public class CustomerServlet extends HttpServlet {
             customer = Customer.emptyCustomer();
             request.getSession().setAttribute("customer", customer);
         }
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
         try {
             PrintWriter pw = response.getWriter();
             pw.write(new JSONObject(customer.forJson()).toString());
             pw.flush();
         } catch (Exception e) {
+            logger.error("Response writing mistake");
             e.printStackTrace();
         }
     }
@@ -57,6 +60,7 @@ public class CustomerServlet extends HttpServlet {
                     customer.setId(0);
                 }
             } catch (Exception e) {
+                logger.warn("Request JSON parsing issue");
                 e.printStackTrace();
             }
             if (customer.getId() == -500) {
@@ -72,6 +76,7 @@ public class CustomerServlet extends HttpServlet {
             pw.write(new JSONObject(customer.forJson()).toString());
             pw.flush();
         } catch (Exception e) {
+            logger.error("Response writing mistake");
             e.printStackTrace();
         }
     }

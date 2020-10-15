@@ -1,0 +1,88 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="brodix" id="cars_data_001">
+    <insert tableName="model">
+        <column name="name" value="Arrow"/>
+        <column name="brand_id" value="2"/>
+    </insert>
+        <insert tableName="generation">
+            <column name="name" value="A"/>
+            <column name="model_id" value="3"/>
+            <column name="start_year" value="2005"/>
+            <column name="end_year" value="2011"/>
+        </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="7"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="1"/>
+                <column name="transmission_id" value="1"/>
+            </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="7"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="2"/>
+                <column name="transmission_id" value="2"/>
+            </insert>
+        <insert tableName="generation">
+            <column name="name" value="B"/>
+            <column name="model_id" value="3"/>
+            <column name="start_year" value="2012"/>
+            <column name="end_year" value="2018"/>
+        </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="8"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="2"/>
+                <column name="transmission_id" value="2"/>
+            </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="8"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="3"/>
+                <column name="transmission_id" value="2"/>
+            </insert>
+    <insert tableName="model">
+        <column name="name" value="Lightning"/>
+        <column name="brand_id" value="2"/>
+    </insert>
+        <insert tableName="generation">
+            <column name="name" value="One"/>
+            <column name="model_id" value="4"/>
+            <column name="start_year" value="2006"/>
+            <column name="end_year" value="2011"/>
+        </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="9"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="1"/>
+                <column name="transmission_id" value="1"/>
+            </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="9"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="2"/>
+                <column name="transmission_id" value="2"/>
+            </insert>
+        <insert tableName="generation">
+            <column name="name" value="Two"/>
+            <column name="model_id" value="4"/>
+            <column name="start_year" value="2012"/>
+            <column name="end_year" value="2017"/>
+        </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="10"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="1"/>
+                <column name="transmission_id" value="1"/>
+            </insert>
+            <insert tableName="config">
+                <column name="generation_id" value="10"/>
+                <column name="body_id" value="1"/>
+                <column name="engine_id" value="2"/>
+                <column name="transmission_id" value="2"/>
+            </insert>
+</changeSet>
+</databaseChangeLog>
