@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 import org.json.JSONObject;
 import ru.carSale.model.*;
 import ru.carSale.model.car.*;
@@ -62,17 +63,68 @@ public class Store implements AutoCloseable{
     }
 
     public List<Advert> advertsByFilter(Filter filter) {
+        int customerId = filter.getCustomerId();
+        boolean lastDayOnly = filter.isLastDayOnly();
+        boolean withPhotoOnly = filter.isWithPhotoOnly();
+        boolean sold = filter.isSold();
+        int brandId = filter.getBrand_id();
         int start = filter.getFirstAdvert();
         int max = filter.getMaxSize();
-        if (filter.isSold() && filter.getCustomerId() == 0) {
-            return allAdvertsArchive(start, max);
-        } else if (!filter.isSold() && filter.getCustomerId() == 0) {
-            return allAdverts(start, max);
-        } else if (filter.getCustomerId() > 0) {
-            return advertsByCustomer(filter.getCustomerId(), start, max);
-        } else {
-            return new ArrayList<>();
+        StringBuilder query = new StringBuilder("FROM Advert adv ");
+        boolean added = false;
+        if (customerId > 0) {
+            added = true;
+            query.append(" adv.customer_id=:customerId");
         }
+        if (brandId > 0) {
+            if (added) {
+                query.append(" AND");
+            } else {
+                query.append(" WHERE");
+            }
+            added = true;
+            query.append(" adv.config.generation.model.brand.id = :brandId");
+        }
+        if (lastDayOnly) {
+            if (added) {
+                query.append(" AND");
+            } else {
+                query.append(" WHERE");
+            }
+            added = true;
+            query.append(" adv.date > :date");
+        }
+        if (withPhotoOnly) {
+            if (added) {
+                query.append(" AND");
+            } else {
+                query.append(" WHERE");
+            }
+            added = true;
+            query.append(" adv.photos.size > 0");
+        }
+        if (!sold) {
+            if (added) {
+                query.append(" AND");
+            } else {
+                query.append(" WHERE");
+            }
+            query.append(" adv.sold = false");
+        }
+        query.append(" ORDER BY adv.id");
+        return this.tx(session -> {
+            Query q = session.createQuery(query.toString());
+            if (customerId > 0) {
+                q.setParameter("customerId", customerId);
+            }
+            if (brandId > 0) {
+                q.setParameter("brandId", brandId);
+            }
+            if (lastDayOnly) {
+                q.setParameter("date", System.currentTimeMillis() - 86400000);
+            }
+            return q.setFirstResult(start).setMaxResults(max).list();
+        });
     }
 
     public Advert saveAdvert(Advert advert) {

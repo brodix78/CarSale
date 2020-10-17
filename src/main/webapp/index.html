@@ -33,13 +33,44 @@
   </div>
   <div class="bs-docs-section">
     <div class="row">
-      <div class="col-lg-4">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="sold" onchange="get_adverts(0, 0, fill_adverts);">
-            Показывать проданные
-          </label>
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="sold">
+              Показывать проданные
+            </label>
+          </div>
         </div>
+        <div class="row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="lastDay">
+              За последний день
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" id="withPhoto">
+              Только с фотографиями
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label for="Brand">Производитель</label>
+            <select class="form-control" id="brand">
+              <!-- brand zone-->
+            </select>
+        </div>
+      </div>
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-3">
+        <button type="button" class="btn btn-primary btn-lg" onclick="get_adverts(0, 0, fill_adverts);">Поиск</button>
       </div>
     </div>
   </div>
@@ -48,7 +79,10 @@
   <!--adverts division-->
   </div>
 </div>
-<script>$("#menu").load("menu.html");</script>
-<script>adverts(0);</script>
+<script>
+  $("#menu").load("menu.html");
+  adverts(0);
+  get_obj("brand", -100, brandsOnly);
+</script>
 </body>
 </html>

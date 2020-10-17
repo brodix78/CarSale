@@ -45,10 +45,12 @@ public class AdvertServlet extends HttpServlet {
             }
             if (filter != null) {
                 List<Advert> adverts = store.advertsByFilter(filter);
-                adverts.stream().forEach(advert -> advert = advert.forJson());
-                json = new JSONArray(adverts).toString();
-                if (json != null) {
-                    writeResp(response, json);
+                if (adverts != null) {
+                    adverts.stream().forEach(advert -> advert = advert.forJson());
+                    json = new JSONArray(adverts).toString();
+                    if (json != null) {
+                        writeResp(response, json);
+                    }
                 }
             }
         } else if ((id = Integer.parseInt(request.getParameter("advertId"))) > 0) {
@@ -64,7 +66,7 @@ public class AdvertServlet extends HttpServlet {
         Store store = (Store) getServletContext().getAttribute("store");
         Customer customer = (Customer) request.getSession().getAttribute("customer");
         Advert advert = Advert.ofLazyMap(getObject(request, new LinkedHashMap()));
-        if (advert != null && (advert.getId() >= 0)) {
+        if (advert.getId() >= 0) {
             advert.setCustomer(customer);
             advert.setConfig(store.configById(advert.getConfig().getId()));
             advert = store.saveAdvert(advert);
