@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="brodix" id="cars_data_002">
+        <insert tableName="generation">
+            <column name="name" value="A"/>
+            <column name="model_id" value="74"/>
+            <column name="start_year" value="2005"/>
+            <column name="end_year" value="2011"/>
+        </insert>
+        <insert tableName="generation">
+            <column name="name" value="B"/>
+            <column name="model_id" value="74"/>
+            <column name="start_year" value="2012"/>
+            <column name="end_year" value="2018"/>
+        </insert>
+        <insert tableName="generation">
+            <column name="name" value="One"/>
+            <column name="model_id" value="75"/>
+            <column name="start_year" value="2006"/>
+            <column name="end_year" value="2011"/>
+        </insert>
+        <insert tableName="generation">
+            <column name="name" value="Two"/>
+            <column name="model_id" value="75"/>
+            <column name="start_year" value="2012"/>
+            <column name="end_year" value="2017"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

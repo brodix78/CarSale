@@ -103,7 +103,6 @@
       <artifactId>liquibase-core</artifactId>
       <version>3.8.0</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -135,6 +134,7 @@
         <version>0.8.4</version>
         <executions>
           <execution>
+            <phase>process-resources</phase>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
